@@ -18,3 +18,14 @@ To seal/encrypt a single value for use in **Sealed Secret** use:
 $ docker run -v <cluster-cert.pem>:/cert.pem hopkinstk/kubeseal-value --cert /cert.pem -n <namespace> --value <value-to-encrypt>
 ```
 **Returns**: encrypted value for a given namespace
+
+
+### Seal using certificate from Controller
+
+To seal/encrypt without certificate (using one in the Kubernetes cluster) use:
+```bash
+$ docker run -v ~/.kube/config:/root/.kube/config hopkinstk/kubeseal-value -n <namespace> --value <value-to-encrypt>
+```
+**Returns**: encrypted value for a given namespace
+
+Similarly whole Kubernetes Secret can be sealed by mapping Kube config `-v ~/.kube/config:/root/.kube/config` instead of mounting certificate `-v <cluster-cert.pem>:/cert.pem` and seting-up the path to it `--cert /cert.pem`.
