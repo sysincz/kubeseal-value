@@ -7,6 +7,11 @@ while [ $# -gt 0 ]; do
       value="$2"
       shift
       ;;
+    -n*)
+      namespace="$2"
+      params+="$1 $2"
+      shift
+      ;;
     *)
       params+="$1 "
       ;;
@@ -20,6 +25,7 @@ then
 apiVersion: v1
 metadata:
   name: secret
+  namespace: "${namespace:-default}"
 kind: Secret
 type: Opaque
 data:
