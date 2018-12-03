@@ -7,6 +7,10 @@ while [ $# -gt 0 ]; do
       value="$2"
       shift
       ;;
+    --secret-name*)
+      name="$2"
+      shift
+      ;;
     -n*)
       namespace="$2"
       params+="$1 $2"
@@ -24,7 +28,7 @@ then
     cat <<EOF | kubeseal $params | grep ".*value\"*: \"*\([^\"]*\)\"*" | sed -e 's/.*: \"*\([^"]*\)\"*/\1/'
 apiVersion: v1
 metadata:
-  name: secret
+  name: "$name"
   namespace: "${namespace:-default}"
 kind: Secret
 type: Opaque
