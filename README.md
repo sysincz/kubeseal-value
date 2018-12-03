@@ -15,7 +15,7 @@ $ docker run -i -v <cluster-cert.pem>:/cert.pem hopkinstk/kubeseal-value --cert 
 
 To seal/encrypt a single value for use in **Sealed Secret** use:
 ```bash
-$ docker run -v <cluster-cert.pem>:/cert.pem hopkinstk/kubeseal-value --cert /cert.pem -n <namespace> --value <value-to-encrypt>
+$ docker run -v <cluster-cert.pem>:/cert.pem hopkinstk/kubeseal-value --cert /cert.pem -n <namespace> --secret-name <name-of-the-secret> --value <value-to-encrypt>
 ```
 **Returns**: encrypted value for a given namespace
 
@@ -24,7 +24,7 @@ $ docker run -v <cluster-cert.pem>:/cert.pem hopkinstk/kubeseal-value --cert /ce
 
 To seal/encrypt without certificate (using one in the Kubernetes cluster) use:
 ```bash
-$ docker run -v ~/.kube/config:/root/.kube/config hopkinstk/kubeseal-value -n <namespace> --value <value-to-encrypt>
+$ docker run -v ~/.kube/config:/root/.kube/config hopkinstk/kubeseal-value -n <namespace> --secret-name <name-of-the-secret> --value <value-to-encrypt>
 ```
 **Returns**: encrypted value for a given namespace
 
